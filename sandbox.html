@@ -1,0 +1,122 @@
+{% extends 'timetracker/layout.html' %}
+
+{% block content %}
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<!-- Dropdown Trigger -->
+  <a class='dropdown-trigger' href='#' data-target='dropdown1'>
+  		<i class="fas fa-bars" style="font-size:40px;"></i>
+  </a>
+
+  <!-- Dropdown Structure -->
+  <ul id='dropdown1' class='dropdown-content'>
+    <li><a href="#!">one</a></li>
+    <li><a href="#!">two</a></li>
+    <li class="divider" tabindex="-1"></li>
+    <li><a href="#!"><i class="material-icons">directions_run</i>Sprint</a></li>
+    <li><a href="#!"><i class="material-icons">timer</i>Timer</a></li>
+    <li><a href="#!"><i class="material-icons">timeline</i>Stats</a></li>
+    <li><a href="#!"><i class="material-icons">content_paste</i>Copy</a></li>
+  </ul>
+
+<h3>Hello from sandbox</h3>
+
+<div class="row">
+          <form class="col s12">
+            <div class="row">
+
+              <div class="input-field col s3">
+                <select id="addResource">
+                  <option value="" disabled selected>Select resource</option>
+                  {% for resource in resources %}
+                    <option value="{{resource.name}}">{{resource.name}}</option>
+                  {% endfor %}
+                  <option value="Add resource">Add resource</option>
+                </select>
+                <label>Resource</label>
+              </div>
+
+              <div class="input-field col s3">
+                <select>
+                  <option value="" disabled selected>Select test</option>
+                  <option value="Diagnostic">Diagnostic</option>
+                  <option value="Practice Test 1">Practice Test 1</option>
+                  <option value="Practice Test 2">Practice Test 2</option>
+                  <option value="Practice Test 3">Practice Test 3</option>
+                </select>
+                <label>Practice Test</label>
+              </div>
+
+              <div class="input-field col s3">
+                <select>
+                  <option value="" disabled selected>Select section</option>
+                  {% for name in sections %}
+                    <option value="{{section.name}}">{{name.section}}</option>
+                  {% endfor %}
+                </select>
+                <label>Section</label>
+              </div>
+
+              <div class="col s3">
+                <div class="col s6">
+                  <div class="input-field inline">
+                    <input name="start" type="number" min="1" max="100" class="validate" >
+                    <label>Start</label>
+                  </div>
+                </div>
+                
+                <div class="col s6">
+                  <div class="input-field inline">
+                    <input name="start" type="number" min="1" max="100" class="validate" >
+                    <label>End</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+
+
+
+<div class="row" id="add_resource">
+    <div class="col s4">
+      <div class="card">
+        <div class="card-content Black-text">
+          <span class="card-title">Add Resource</span>
+          {% csrf_token %}
+            <div class="input-field">
+              <input type="text" id="name">
+              <label>Resource Name</label>
+            </div>
+            <div class="input-field">
+              <input type="text" id="test">
+              <label>Test</label>
+            </div>
+
+          <button id="addResources" class="btn waves-effect waves-light btn deep-orange lighten-2">Add</button>
+      </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<a id="getResources"class="waves-effect waves-light btn deep-orange lighten-2">Get Resources</a>
+
+<ul id="resources"></ul>
+
+
+
+
+<script>
+  $(document).ready(function() {
+    $('select').formSelect();
+    $(".dropdown-trigger").dropdown();
+  });
+</script>
+
+
+
+
+{% endblock %}
